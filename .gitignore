@@ -1,0 +1,110 @@
+# ============================================
+# Operating System
+# ============================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+
+# ============================================
+# Environment / Secrets
+# ============================================
+
+.env
+.env.*
+!.env.example
+
+secrets/
+*.secret
+*.key
+*.pem
+*.pfx
+*.cer
+*.crt
+
+
+# ============================================
+# Node / Angular
+# ============================================
+
+node_modules/
+.angular/
+dist/
+coverage/
+.nx/
+.tmp/
+
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+
+# ============================================
+# .NET
+# ============================================
+
+bin/
+obj/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+
+# ============================================
+# Visual Studio / VS Code Local Files
+# ============================================
+
+.vs/
+
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+
+# Angular local MCP configuration
+**/.vscode/mcp.json
+
+
+# ============================================
+# Logs
+# ============================================
+
+*.log
+logs/
+
+
+# ============================================
+# Database / Local Data
+# ============================================
+
+*.bak
+*.backup
+*.mdf
+*.ndf
+*.ldf
+
+# Local database exports
+database/local/
+database/backups/
+
+
+# ============================================
+# Build / Temporary Files
+# ============================================
+
+*.tmp
+*.temp
+*.cache
+
+
+# ============================================
+# OS / IDE
+# ============================================
+
+.idea/
+*.swp
+*.swo
