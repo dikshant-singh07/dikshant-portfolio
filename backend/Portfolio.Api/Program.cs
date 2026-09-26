@@ -1,8 +1,15 @@
+using Portfolio.Api.Data;
+using Portfolio.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IDbConnectionFactory, SqlConnectionFactory>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 // OpenAPI document generation
 builder.Services.AddOpenApi();
