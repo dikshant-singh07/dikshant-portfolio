@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IDbConnectionFactory, SqlConnectionFactory>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<ISkillService, SkillService>();
+builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 
 // OpenAPI document generation
 builder.Services.AddOpenApi();
