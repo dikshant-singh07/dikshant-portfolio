@@ -10,4 +10,5 @@ public interface IProjectService
     Task<ProjectDto?> UpdateProjectAsync(
         int projectId,
         UpdateProjectRequest request);
+    Task<bool> DeleteProjectAsync(int projectId);
 }

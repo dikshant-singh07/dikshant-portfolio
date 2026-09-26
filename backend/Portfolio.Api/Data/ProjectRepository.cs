@@ -180,4 +180,31 @@ public async Task<ProjectDto?> UpdateProjectAsync(
     };
 }
 
+public async Task<bool> DeleteProjectAsync(int projectId)
+{
+    await using SqlConnection connection = _connectionFactory.CreateConnection();
+    await connection.OpenAsync();
+
+    await using SqlCommand command = new(
+        "dbo.usp_Project_Delete",
+        connection);
+
+    command.CommandType = CommandType.StoredProcedure;
+
+    command.Parameters.Add(
+        new SqlParameter("@ProjectId", projectId));
+
+    await using SqlDataReader reader = await command.ExecuteReaderAsync();
+
+    if (!await reader.ReadAsync())
+    {
+        return false;
+    }
+
+    int rowsAffected = reader.GetInt32(
+        reader.GetOrdinal("RowsAffected"));
+
+    return rowsAffected > 0;
+}
+
 }

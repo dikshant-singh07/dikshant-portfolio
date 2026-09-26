@@ -65,4 +65,17 @@ public class ProjectController : ControllerBase
         return Ok(project);
     }
 
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteProject(int id)
+    {
+        var deleted = await _projectService.DeleteProjectAsync(id);
+
+        if (!deleted)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
+
 }
