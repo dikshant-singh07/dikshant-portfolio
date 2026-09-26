@@ -136,3 +136,30 @@ GO
 
 ALTER TABLE [dbo].[Experience] ADD  CONSTRAINT [DF_Experience_IsCurrent]  DEFAULT ((0)) FOR [IsCurrent]
 GO
+
+USE [PortfolioDb]
+GO
+
+/****** Object:  Table [dbo].[ContactMessages]    Script Date: 26-09-2026 21:51:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ContactMessages](
+	[ContactMessageId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](254) NOT NULL,
+	[Subject] [nvarchar](200) NULL,
+	[Message] [nvarchar](2000) NOT NULL,
+	[CreatedAt] [datetime2](0) NOT NULL,
+ CONSTRAINT [PK_ContactMessages] PRIMARY KEY CLUSTERED
+(
+	[ContactMessageId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ContactMessages] ADD  CONSTRAINT [DF_ContactMessages_CreatedAt]  DEFAULT (sysutcdatetime()) FOR [CreatedAt]
+GO
