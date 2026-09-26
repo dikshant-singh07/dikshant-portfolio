@@ -14,6 +14,8 @@ builder.Services.AddScoped<ISkillService, SkillService>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 builder.Services.AddScoped<ITechnologyService, TechnologyService>();
 builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 
 // OpenAPI document generation
 builder.Services.AddOpenApi();

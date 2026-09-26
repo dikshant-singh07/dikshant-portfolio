@@ -107,3 +107,32 @@ REFERENCES [dbo].[Technologies] ([TechnologyId])
 GO
 ALTER TABLE [dbo].[ProjectTechnologies] CHECK CONSTRAINT [FK_ProjectTechnologies_Technologies]
 GO
+
+USE [PortfolioDb]
+GO
+
+/****** Object:  Table [dbo].[Experience]    Script Date: 26-09-2026 21:34:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Experience](
+	[ExperienceId] [int] IDENTITY(1,1) NOT NULL,
+	[Company] [nvarchar](150) NOT NULL,
+	[JobTitle] [nvarchar](150) NOT NULL,
+	[Location] [nvarchar](150) NULL,
+	[StartDate] [date] NOT NULL,
+	[EndDate] [date] NULL,
+	[IsCurrent] [bit] NOT NULL,
+	[Description] [nvarchar](2000) NOT NULL,
+ CONSTRAINT [PK_Experience] PRIMARY KEY CLUSTERED
+(
+	[ExperienceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Experience] ADD  CONSTRAINT [DF_Experience_IsCurrent]  DEFAULT ((0)) FOR [IsCurrent]
+GO
