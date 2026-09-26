@@ -82,4 +82,49 @@ public async Task<ProjectDto?> GetProjectByIdAsync(int projectId)
     };
 }
 
+public async Task<ProjectDto> CreateProjectAsync(CreateProjectRequest request)
+{
+    await using SqlConnection connection = _connectionFactory.CreateConnection();
+    await connection.OpenAsync();
+
+    await using SqlCommand command = new(
+        "dbo.usp_Project_Create",
+        connection);
+
+    command.CommandType = CommandType.StoredProcedure;
+
+    command.Parameters.Add(
+        new SqlParameter("@Title", request.Title));
+
+    command.Parameters.Add(
+        new SqlParameter("@Description", request.Description));
+
+    command.Parameters.Add(
+        new SqlParameter("@GithubUrl", (object?)request.GithubUrl ?? DBNull.Value));
+
+    command.Parameters.Add(
+        new SqlParameter("@LiveUrl", (object?)request.LiveUrl ?? DBNull.Value));
+
+    await using SqlDataReader reader = await command.ExecuteReaderAsync();
+
+    if (!await reader.ReadAsync())
+    {
+        throw new InvalidOperationException(
+            "The project was not created.");
+    }
+
+    return new ProjectDto
+    {
+        Id = reader.GetInt32(reader.GetOrdinal("ProjectId")),
+        Title = reader.GetString(reader.GetOrdinal("Title")),
+        Description = reader.GetString(reader.GetOrdinal("Description")),
+        GithubUrl = reader.IsDBNull(reader.GetOrdinal("GithubUrl"))
+            ? null
+            : reader.GetString(reader.GetOrdinal("GithubUrl")),
+        LiveUrl = reader.IsDBNull(reader.GetOrdinal("LiveUrl"))
+            ? null
+            : reader.GetString(reader.GetOrdinal("LiveUrl"))
+    };
+}
+
 }

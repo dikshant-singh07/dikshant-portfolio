@@ -22,4 +22,9 @@ public class ProjectService : IProjectService
         return await _projectRepository.GetProjectByIdAsync(projectId);
     }
 
+    public async Task<ProjectDto> CreateProjectAsync(CreateProjectRequest request)
+    {
+        return await _projectRepository.CreateProjectAsync(request);
+    }
+
 }

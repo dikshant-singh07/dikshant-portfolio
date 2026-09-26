@@ -36,4 +36,16 @@ public class ProjectController : ControllerBase
         return Ok(project);
     }
 
+    [HttpPost]
+    public async Task<ActionResult<ProjectDto>> CreateProject(
+        CreateProjectRequest request)
+    {
+        var project = await _projectService.CreateProjectAsync(request);
+
+        return CreatedAtAction(
+            nameof(GetProjectById),
+            new { id = project.Id },
+            project);
+    }
+
 }
