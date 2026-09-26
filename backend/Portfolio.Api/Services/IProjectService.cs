@@ -5,4 +5,5 @@ namespace Portfolio.Api.Services;
 public interface IProjectService
 {
     Task<List<ProjectDto>> GetProjectsAsync();
+    Task<ProjectDto?> GetProjectByIdAsync(int projectId);
 }

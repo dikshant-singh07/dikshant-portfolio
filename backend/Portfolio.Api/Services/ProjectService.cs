@@ -16,4 +16,10 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.GetProjectsAsync();
     }
+
+    public async Task<ProjectDto?> GetProjectByIdAsync(int projectId)
+    {
+        return await _projectRepository.GetProjectByIdAsync(projectId);
+    }
+
 }
