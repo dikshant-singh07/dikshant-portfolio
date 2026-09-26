@@ -27,4 +27,13 @@ public class ProjectService : IProjectService
         return await _projectRepository.CreateProjectAsync(request);
     }
 
+    public async Task<ProjectDto?> UpdateProjectAsync(
+        int projectId,
+        UpdateProjectRequest request)
+    {
+        return await _projectRepository.UpdateProjectAsync(
+            projectId,
+            request);
+    }
+
 }

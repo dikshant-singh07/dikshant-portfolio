@@ -48,4 +48,21 @@ public class ProjectController : ControllerBase
             project);
     }
 
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<ProjectDto>> UpdateProject(
+        int id,
+        UpdateProjectRequest request)
+    {
+        var project = await _projectService.UpdateProjectAsync(
+            id,
+            request);
+
+        if (project is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(project);
+    }
+
 }
