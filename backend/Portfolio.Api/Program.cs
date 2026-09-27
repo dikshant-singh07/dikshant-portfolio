@@ -28,6 +28,8 @@ builder.Services.AddScoped<IExperienceService, ExperienceService>();
 builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<ISkillGroupService, SkillGroupService>();
+builder.Services.AddScoped<ISkillGroupRepository, SkillGroupRepository>();
 
 // OpenAPI document generation
 builder.Services.AddOpenApi();

@@ -163,3 +163,103 @@ GO
 
 ALTER TABLE [dbo].[ContactMessages] ADD  CONSTRAINT [DF_ContactMessages_CreatedAt]  DEFAULT (sysutcdatetime()) FOR [CreatedAt]
 GO
+
+USE [PortfolioDb]
+GO
+
+/****** Object:  Table [dbo].[SkillGroups]    Script Date: 27-09-2026 11:37:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SkillGroups](
+	[SkillGroupId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[GroupType] [nvarchar](50) NOT NULL,
+	[DisplayOrder] [int] NOT NULL,
+ CONSTRAINT [PK_SkillGroups] PRIMARY KEY CLUSTERED
+(
+	[SkillGroupId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_SkillGroups_Name] UNIQUE NONCLUSTERED
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+USE [PortfolioDb]
+GO
+
+/****** Object:  Table [dbo].[SkillGroupSkills]    Script Date: 27-09-2026 11:38:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SkillGroupSkills](
+	[SkillGroupId] [int] NOT NULL,
+	[SkillId] [int] NOT NULL,
+	[SkillType] [nvarchar](50) NOT NULL,
+	[DisplayOrder] [int] NOT NULL,
+ CONSTRAINT [PK_SkillGroupSkills] PRIMARY KEY CLUSTERED
+(
+	[SkillGroupId] ASC,
+	[SkillId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SkillGroupSkills]  WITH CHECK ADD  CONSTRAINT [FK_SkillGroupSkills_SkillGroups] FOREIGN KEY([SkillGroupId])
+REFERENCES [dbo].[SkillGroups] ([SkillGroupId])
+GO
+
+ALTER TABLE [dbo].[SkillGroupSkills] CHECK CONSTRAINT [FK_SkillGroupSkills_SkillGroups]
+GO
+
+ALTER TABLE [dbo].[SkillGroupSkills]  WITH CHECK ADD  CONSTRAINT [FK_SkillGroupSkills_Skills] FOREIGN KEY([SkillId])
+REFERENCES [dbo].[Skills] ([SkillId])
+GO
+
+ALTER TABLE [dbo].[SkillGroupSkills] CHECK CONSTRAINT [FK_SkillGroupSkills_Skills]
+GO
+
+USE [PortfolioDb]
+GO
+
+/****** Object:  Table [dbo].[SkillGroupTechnologies]    Script Date: 27-09-2026 11:38:39 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SkillGroupTechnologies](
+	[SkillGroupId] [int] NOT NULL,
+	[TechnologyId] [int] NOT NULL,
+	[TechnologyType] [nvarchar](50) NOT NULL,
+	[DisplayOrder] [int] NOT NULL,
+ CONSTRAINT [PK_SkillGroupTechnologies] PRIMARY KEY CLUSTERED
+(
+	[SkillGroupId] ASC,
+	[TechnologyId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SkillGroupTechnologies]  WITH CHECK ADD  CONSTRAINT [FK_SkillGroupTechnologies_SkillGroups] FOREIGN KEY([SkillGroupId])
+REFERENCES [dbo].[SkillGroups] ([SkillGroupId])
+GO
+
+ALTER TABLE [dbo].[SkillGroupTechnologies] CHECK CONSTRAINT [FK_SkillGroupTechnologies_SkillGroups]
+GO
+
+ALTER TABLE [dbo].[SkillGroupTechnologies]  WITH CHECK ADD  CONSTRAINT [FK_SkillGroupTechnologies_Technologies] FOREIGN KEY([TechnologyId])
+REFERENCES [dbo].[Technologies] ([TechnologyId])
+GO
+
+ALTER TABLE [dbo].[SkillGroupTechnologies] CHECK CONSTRAINT [FK_SkillGroupTechnologies_Technologies]
+GO
