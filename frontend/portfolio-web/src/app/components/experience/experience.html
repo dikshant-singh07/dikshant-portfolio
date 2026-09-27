@@ -14,43 +14,54 @@
 
     <div class="experience-list">
 
-      <article class="experience-item">
+      @for (experience of experiences(); track experience.experienceId; let i = $index) {
+        <article class="experience-item">
 
-        <div class="experience-meta">
-          <span class="experience-number">01</span>
-          <span class="experience-period">2026 — PRESENT</span>
-        </div>
+          <div class="experience-meta">
+            <span class="experience-number">
+              {{ (i + 1).toString().padStart(2, '0') }}
+            </span>
 
-        <div class="experience-main">
-
-          <div class="experience-title">
-            <div>
-              <h3>Software Developer</h3>
-              <p class="company">Professional Experience</p>
-            </div>
-
-            <span class="experience-status">
-              CURRENT
+            <span class="experience-period">
+              {{ experience.startDate | date:'yyyy' }}
+              —
+              @if (experience.isCurrent) {
+                PRESENT
+              } @else {
+                {{ experience.endDate | date:'yyyy' }}
+              }
             </span>
           </div>
 
-          <p class="experience-description">
-            Working across web application development, backend APIs,
-            relational databases and frontend systems, with a focus on
-            building and maintaining practical business applications.
-          </p>
+          <div class="experience-main">
 
-          <div class="experience-stack">
-            <span>.NET</span>
-            <span>ASP.NET MVC</span>
-            <span>Web API</span>
-            <span>SQL Server</span>
-            <span>Angular</span>
+            <div class="experience-title">
+              <div>
+                <h3>{{ experience.jobTitle }}</h3>
+                <p class="company">{{ experience.company }}</p>
+              </div>
+
+              @if (experience.isCurrent) {
+                <span class="experience-status">
+                  CURRENT
+                </span>
+              }
+            </div>
+
+            <p class="experience-description">
+              {{ experience.description }}
+            </p>
+
+            @if (experience.location) {
+              <div class="experience-stack">
+                <span>{{ experience.location }}</span>
+              </div>
+            }
+
           </div>
 
-        </div>
-
-      </article>
+        </article>
+      }
 
     </div>
 
