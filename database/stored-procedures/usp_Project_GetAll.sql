@@ -7,12 +7,23 @@ BEGIN
     SET NOCOUNT ON;
 
     SELECT
-        ProjectId,
-        Title,
-        Description,
-        GithubUrl,
-        LiveUrl
-    FROM dbo.Projects
-    ORDER BY ProjectId;
+        p.ProjectId,
+        p.Title,
+        p.Description,
+        p.GithubUrl,
+        p.LiveUrl,
+        STRING_AGG(t.Name, ', ') AS Technologies
+    FROM dbo.Projects AS p
+    LEFT JOIN dbo.ProjectTechnologies AS pt
+        ON p.ProjectId = pt.ProjectId
+    LEFT JOIN dbo.Technologies AS t
+        ON pt.TechnologyId = t.TechnologyId
+    GROUP BY
+        p.ProjectId,
+        p.Title,
+        p.Description,
+        p.GithubUrl,
+        p.LiveUrl
+    ORDER BY p.ProjectId;
 END;
 GO

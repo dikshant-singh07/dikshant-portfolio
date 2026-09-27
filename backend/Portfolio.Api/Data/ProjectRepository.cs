@@ -40,7 +40,13 @@ public async Task<List<ProjectDto>> GetProjectsAsync()
                 : reader.GetString(reader.GetOrdinal("GithubUrl")),
             LiveUrl = reader.IsDBNull(reader.GetOrdinal("LiveUrl"))
                 ? null
-                : reader.GetString(reader.GetOrdinal("LiveUrl"))
+                : reader.GetString(reader.GetOrdinal("LiveUrl")),
+            Technologies = reader.IsDBNull(reader.GetOrdinal("Technologies"))
+                ? new List<string>()
+                : reader
+                    .GetString(reader.GetOrdinal("Technologies"))
+                    .Split(", ", StringSplitOptions.RemoveEmptyEntries)
+                    .ToList()
         });
     }
 

@@ -11,4 +11,6 @@ public class ProjectDto
     public string? GithubUrl { get; set; }
 
     public string? LiveUrl { get; set; }
+
+    public List<string> Technologies { get; set; } = new();
 }
